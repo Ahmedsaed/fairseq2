@@ -21,3 +21,5 @@ __pycache__/
 
 # Other
 .DS_Store
+fairseq2-env
+tmp
