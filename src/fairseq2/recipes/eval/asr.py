@@ -21,9 +21,10 @@ from fairseq2.data.text import load_text_tokenizer
 from fairseq2.datasets.batching import StaticBatching
 from fairseq2.datasets.huggingface import Example, create_hf_reader
 from fairseq2.logging import get_log_writer
+from fairseq2.models import load_model
+from fairseq2.models.model import Model
 from fairseq2.models.seq2seq import Seq2SeqBatch
 from fairseq2.models.sequence import SequenceBatch
-from fairseq2.models.wav2vec2.asr import load_wav2vec2_asr_model
 from fairseq2.nn.padding import get_seqs_and_padding_mask
 from fairseq2.recipes.eval.configs import (
     HFEvalConfig,
@@ -94,8 +95,15 @@ class ASREvaluator:
     def __init__(self) -> None:
         self.gang = setup_root_gang(log)
         self.init_device = self.gang.device if self.gang.rank == 0 else META
+        self.wall_watch = Stopwatch(device=self.init_device)
 
-    def _librispeech_asr_to_batch(self, examples: Example) -> Seq2SeqBatch:
+    def to_batch(self, examples: Example) -> Seq2SeqBatch:
+        """
+        Convert the example data to a batch.
+
+        Args:
+            examples: Collated and padded examples.
+        """
         source_data = cast(SequenceData, examples["audio"])
         target_data = cast(SequenceData, examples["text"])
 
@@ -111,17 +119,35 @@ class ASREvaluator:
         )
 
     def _preprocess_example(self, example: Example) -> Example:
+        """
+        Preprocess the example data.
+
+        Note: should be refactored and removed from this class.
+
+        Args:
+            example: The example data.
+
+        Returns:
+            audio and text tensors.
+        """
         audio_tensor = (
             torch.from_numpy(example["audio"]["array"])
-            .to(torch.float16)
+            .to(self.config.dtype)
             .to(self.init_device)
         )
         text_tensor = self.encoder(example["text"].lower()).to(self.init_device)
         return {"audio": audio_tensor, "text": text_tensor}
 
-    def seq2seq_preprocessor(
-        self, batch: Seq2SeqBatch
-    ) -> Tuple[SequenceBatch, SequenceBatch]:
+    def preprocessor(self, batch: Seq2SeqBatch) -> Tuple[SequenceBatch, SequenceBatch]:
+        """
+        Preprocess the batch data.
+
+        Args:
+            batch: The batch data.
+
+        Returns:
+            A tuple of source and target sequences in the form of SequenceBatch.
+        """
         return SequenceBatch(
             batch.source_seqs, batch.source_padding_mask
         ), SequenceBatch(batch.target_seqs, batch.target_padding_mask)
@@ -129,6 +155,13 @@ class ASREvaluator:
     def postprocesser(
         self, outputs: Any, targets: SequenceBatch
     ) -> Tuple[List[str], List[str]]:
+        """
+        Postprocess the outputs and targets to get the predictions and references.
+
+        Args:
+            outputs: The model outputs.
+            targets: The target sequences.
+        """
         decoder = self.tokenizer.create_decoder()
         pad_idx = self.tokenizer.vocab_info.pad_idx
 
@@ -138,13 +171,19 @@ class ASREvaluator:
 
         return predictions, references
 
-    def _load_evaluator(self) -> HFEvaluator[Seq2SeqBatch]:
-        iterable_ds = load_dataset(
-            self.config.dataset_name, split=self.config.split, streaming=True
-        )
-        max_samples = (
-            self.config.max_samples if self.config.max_samples is not None else math.inf
-        )
+    def _load_dataset(
+        self, dataset_name: str, split: str, max_samples: Optional[int]
+    ) -> Dataset:
+        """
+        Load a huggingface dataset.
+
+        Args:
+            dataset_name: The name of the dataset to load.
+            split: The split of the dataset to load.
+            max_samples: The maximum number of samples to load.
+        """
+        iterable_ds = load_dataset(dataset_name, split=split, streaming=True)
+        max_samples = cast(int, max_samples if max_samples is not None else math.inf)
 
         ds = Dataset.from_generator(
             lambda: (
@@ -158,39 +197,57 @@ class ASREvaluator:
         ds = ds.map(self._preprocess_example)
         format = {
             "type": "torch",
-            "format_kwargs": {"dtype": torch.float16, "device": self.init_device},
+            "format_kwargs": {"dtype": self.config.dtype, "device": self.init_device},
         }
         ds.set_format(**format, columns=["audio", "text"])
+        return ds
 
+    def _load_model(self, model_name: str) -> Model:
+        """
+        Load the model.
+
+        Args:
+            model_name: The name of the model to load.
+        """
+        model = load_model(model_name, device=self.init_device, dtype=self.config.dtype)
+        return cast(Model, model)
+
+    def _load_evaluator(self) -> HFEvaluator[Seq2SeqBatch]:
+        """
+        Load the HFEvaluator for ASR.
+
+        Returns:
+            The evaluator for ASR.
+        """
         pipeline_reader = create_hf_reader(
-            dataset=ds,
+            dataset=self.dataset,
             gang=self.gang,
-            converter=self._librispeech_asr_to_batch,
+            converter=self.to_batch,
             batching=StaticBatching(self.config.max_num_elements),
             num_prefetch=self.config.num_prefetch,
             pad_value=self.tokenizer.vocab_info.pad_idx,
             max_seq_len=self.config.max_audio_len,
         )
 
-        model = load_wav2vec2_asr_model(
-            self.config.model_name, device=self.init_device, dtype=self.config.dtype
-        )
-
-        wall_watch = Stopwatch(start=True, device=self.init_device)
+        self.wall_watch.start()
 
         return HFEvaluator[Seq2SeqBatch](
-            model=model,
+            model=self.model,
             metrics=["bleu"],
             gang=self.gang,
             data_reader=pipeline_reader,
-            wall_watch=wall_watch,
-            preprocessor=self.seq2seq_preprocessor,
+            wall_watch=self.wall_watch,
+            preprocessor=self.preprocessor,
             postprocessor=lambda x, y: self.postprocesser(x, y),
         )
 
     def __call__(self, config: HFEvalConfig, output_dir: Path) -> Callable[[], None]:
         """
-        This method will run the evaluation process.
+        Create an evaluation process for ASR.
+
+        Args:
+            config: The configuration of the evaluation process.
+            output_dir: The directory to store the evaluation results.
 
         Returns:
             A callable that will run the evaluation process
@@ -201,7 +258,11 @@ class ASREvaluator:
         self.config = config
         self.output_dir = output_dir
 
+        self.model = self._load_model(config.model_name)
         self.tokenizer = load_text_tokenizer(config.tokenizer_name)
         self.encoder = self.tokenizer.create_encoder(device=self.init_device)
+        self.dataset = self._load_dataset(
+            config.dataset_name, config.split, config.max_samples
+        )
 
         return self._load_evaluator()
