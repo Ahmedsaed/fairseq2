@@ -6,7 +6,7 @@
 
 from fairseq2.logging import get_log_writer
 from fairseq2.recipes.cli import Cli, CliGroup, RecipeCommandHandler
-from fairseq2.recipes.eval.configs import hf_presets
+from fairseq2.recipes.eval.configs import wav2vec2_presets, whisper_presets
 
 log = get_log_writer(__name__)
 
@@ -16,7 +16,7 @@ def _add_wav2vev2_asr_eval_cli(group: CliGroup) -> None:
 
     handler = RecipeCommandHandler(
         load_wav2vec2_asr_evaluator,
-        preset_configs=hf_presets,
+        preset_configs=wav2vec2_presets,
         default_preset="librispeech_asr",
     )
     group.add_command(

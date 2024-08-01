@@ -26,7 +26,7 @@ from fairseq2.models.seq2seq import Seq2SeqBatch
 from fairseq2.models.sequence import SequenceBatch
 from fairseq2.models.wav2vec2.asr import load_wav2vec2_asr_model
 from fairseq2.nn.padding import get_seqs_and_padding_mask
-from fairseq2.recipes.eval.configs import HFEvalConfig, hf_presets
+from fairseq2.recipes.eval.configs import HFEvalConfig, wav2vec2_presets, whisper_presets
 from fairseq2.recipes.evaluator import HFEvaluator
 from fairseq2.recipes.utils.setup import setup_root_gang
 from fairseq2.typing import META, DataType
