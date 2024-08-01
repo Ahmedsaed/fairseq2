@@ -20,4 +20,5 @@ class HFEvalConfig:
     """The name of the model to evaluate."""
 
 
-hf_presets = ConfigRegistry[HFEvalConfig]()
+wav2vec2_presets = ConfigRegistry[HFEvalConfig]()
+whisper_presets = ConfigRegistry[HFEvalConfig]()
