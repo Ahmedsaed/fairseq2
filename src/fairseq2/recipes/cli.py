@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import sys
+import shtab  # for completion magic
 from abc import ABC, abstractmethod
 from argparse import OPTIONAL, ArgumentParser, Namespace
 from collections.abc import Callable
@@ -139,6 +140,7 @@ class Cli:
 
     def _run_command(self) -> None:
         parser = ArgumentParser(self._name, description=self._description)
+        shtab.add_argument_to(parser, ["-s", "--print-completion"])
 
         self.init_parser(parser)
 
@@ -484,7 +486,7 @@ class RecipeCommandHandler(CliCommandHandler, Generic[RecipeConfigT]):
             type=Path,
             nargs="*",
             help="yaml configuration file(s)",
-        )
+        ).complete = shtab.FILE
 
         parser.add_argument(
             "--config",
@@ -527,7 +529,7 @@ class RecipeCommandHandler(CliCommandHandler, Generic[RecipeConfigT]):
             type=Path,
             nargs=OPTIONAL,
             help="directory to store recipe artifacts",
-        )
+        ).complete = shtab.DIRECTORY
 
     @override
     def __call__(self, args: Namespace) -> None:
