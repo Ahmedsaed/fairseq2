@@ -66,8 +66,8 @@ class AsrDatasetConfig:
         return cls(
             dataset_path=config_dict.get('dataset_path', ''),
             dataset_name=config_dict.get('dataset_name'),
-            source_column=config_dict.get('source_column', []).split('.'),
-            target_column=config_dict.get('target_column', []).split('.'),
+            source_column=config_dict.get('source_column', []),
+            target_column=config_dict.get('target_column', []),
             tokenizer_name=config_dict.get('tokenizer_name')
         )
 
@@ -138,8 +138,8 @@ def _default_asr_config() -> AsrEvalConfig:
     return AsrEvalConfig(
         dataset_config=AsrDatasetConfig.from_dict({
             'dataset_path': 'librispeech_asr',
-            'source_column': 'audio.array',
-            'target_column': 'text',
+            'source_column': ['audio', 'array'],
+            'target_column': ['text'],
             'tokenizer_name': 'librispeech_asr',
         }),
         model_name="wav2vec2_asr_base_10h",
