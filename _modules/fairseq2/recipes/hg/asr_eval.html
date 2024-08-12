@@ -128,18 +128,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../reference/hg.html#usage-example">Usage Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../reference/hg.html#asr-evaluation">ASR Evaluation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig"><code class="docutils literal notranslate"><span class="pre">AsrEvalConfig</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.extract_features"><code class="docutils literal notranslate"><span class="pre">extract_features()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.to_batch"><code class="docutils literal notranslate"><span class="pre">to_batch()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.prepare_dataset"><code class="docutils literal notranslate"><span class="pre">prepare_dataset()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_asr_evaluator()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_wav2vec2_asr_evaluator()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_hg_asr_evaluator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.extract_features.html">extract_features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.to_batch.html">to_batch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.prepare_dataset.html">prepare_dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_asr_evaluator.html">load_asr_evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator.html">load_wav2vec2_asr_evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator.html">load_hg_asr_evaluator</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../reference/hg.html#utilities">Utilities</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.dataset.create_hf_reader"><code class="docutils literal notranslate"><span class="pre">create_hf_reader()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/hg.html#utilities">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../reference/hg.html#extending-the-framework">Extending the Framework</a></li>
 </ul>
 </li>
@@ -277,7 +274,7 @@
     <span class="p">)</span>
 
 
-<div class="viewcode-block" id="extract_features"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.extract_features">[docs]</a><span class="k">def</span> <span class="nf">extract_features</span><span class="p">(</span><span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Example</span><span class="p">:</span>
+<div class="viewcode-block" id="extract_features"><a class="viewcode-back" href="../../../../reference/generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.extract_features.html#fairseq2.recipes.hg.asr_eval.extract_features">[docs]</a><span class="k">def</span> <span class="nf">extract_features</span><span class="p">(</span><span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Example</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extracts source and target features from dataset examples.</span>
 
@@ -290,7 +287,7 @@
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;audio&quot;</span><span class="p">:</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">][</span><span class="s2">&quot;array&quot;</span><span class="p">],</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()}</span></div>
 
 
-<div class="viewcode-block" id="to_batch"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.to_batch">[docs]</a><span class="k">def</span> <span class="nf">to_batch</span><span class="p">(</span><span class="n">examples</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span> <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Seq2SeqBatch</span><span class="p">:</span>
+<div class="viewcode-block" id="to_batch"><a class="viewcode-back" href="../../../../reference/generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.to_batch.html#fairseq2.recipes.hg.asr_eval.to_batch">[docs]</a><span class="k">def</span> <span class="nf">to_batch</span><span class="p">(</span><span class="n">examples</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span> <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Seq2SeqBatch</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a collated batch of examples into a Seq2SeqBatch.</span>
 
@@ -327,7 +324,7 @@
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="prepare_dataset"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.prepare_dataset">[docs]</a><span class="k">def</span> <span class="nf">prepare_dataset</span><span class="p">(</span>
+<div class="viewcode-block" id="prepare_dataset"><a class="viewcode-back" href="../../../../reference/generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.prepare_dataset.html#fairseq2.recipes.hg.asr_eval.prepare_dataset">[docs]</a><span class="k">def</span> <span class="nf">prepare_dataset</span><span class="p">(</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">AsrEvalConfig</span><span class="p">,</span> <span class="n">processor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Example</span><span class="p">],</span> <span class="n">Example</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -379,7 +376,7 @@
     <span class="k">return</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">references</span>
 
 
-<div class="viewcode-block" id="load_asr_evaluator"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_asr_evaluator">[docs]</a><span class="k">def</span> <span class="nf">load_asr_evaluator</span><span class="p">(</span>
+<div class="viewcode-block" id="load_asr_evaluator"><a class="viewcode-back" href="../../../../reference/generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_asr_evaluator.html#fairseq2.recipes.hg.asr_eval.load_asr_evaluator">[docs]</a><span class="k">def</span> <span class="nf">load_asr_evaluator</span><span class="p">(</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">AsrEvalConfig</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HFEvaluator</span><span class="p">[</span><span class="n">Seq2SeqBatch</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -399,7 +396,7 @@
         <span class="k">return</span> <span class="n">load_hg_asr_evaluator</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="load_wav2vec2_asr_evaluator"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator">[docs]</a><span class="k">def</span> <span class="nf">load_wav2vec2_asr_evaluator</span><span class="p">(</span>
+<div class="viewcode-block" id="load_wav2vec2_asr_evaluator"><a class="viewcode-back" href="../../../../reference/generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator.html#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator">[docs]</a><span class="k">def</span> <span class="nf">load_wav2vec2_asr_evaluator</span><span class="p">(</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">AsrEvalConfig</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HFEvaluator</span><span class="p">[</span><span class="n">Seq2SeqBatch</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -461,7 +458,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">seqs</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="load_hg_asr_evaluator"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator">[docs]</a><span class="k">def</span> <span class="nf">load_hg_asr_evaluator</span><span class="p">(</span>
+<div class="viewcode-block" id="load_hg_asr_evaluator"><a class="viewcode-back" href="../../../../reference/generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator.html#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator">[docs]</a><span class="k">def</span> <span class="nf">load_hg_asr_evaluator</span><span class="p">(</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">AsrEvalConfig</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HFEvaluator</span><span class="p">[</span><span class="n">Seq2SeqBatch</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>

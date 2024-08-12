@@ -1,0 +1,6 @@
+﻿.. currentmodule:: fairseq2.recipes.hg.dataset
+
+create\_hf\_reader
+==================
+
+.. autofunction:: create_hf_reader

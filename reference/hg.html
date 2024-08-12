@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="All" href="all.html" />
+    <link rel="next" title="extract_features" href="generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.extract_features.html" />
     <link rel="prev" title="AssetMetadataProvider" href="generated/data/fairseq2.assets.AssetMetadataProvider.html" /> 
 </head>
 
@@ -131,18 +131,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#usage-example">Usage Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#asr-evaluation">ASR Evaluation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#fairseq2.recipes.hg.asr_eval.AsrEvalConfig"><code class="docutils literal notranslate"><span class="pre">AsrEvalConfig</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fairseq2.recipes.hg.asr_eval.extract_features"><code class="docutils literal notranslate"><span class="pre">extract_features()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fairseq2.recipes.hg.asr_eval.to_batch"><code class="docutils literal notranslate"><span class="pre">to_batch()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fairseq2.recipes.hg.asr_eval.prepare_dataset"><code class="docutils literal notranslate"><span class="pre">prepare_dataset()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fairseq2.recipes.hg.asr_eval.load_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_asr_evaluator()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_wav2vec2_asr_evaluator()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_hg_asr_evaluator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.extract_features.html">extract_features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.to_batch.html">to_batch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.prepare_dataset.html">prepare_dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_asr_evaluator.html">load_asr_evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator.html">load_wav2vec2_asr_evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator.html">load_hg_asr_evaluator</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#fairseq2.recipes.hg.dataset.create_hf_reader"><code class="docutils literal notranslate"><span class="pre">create_hf_reader()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#extending-the-framework">Extending the Framework</a></li>
 </ul>
 </li>
@@ -190,19 +187,19 @@
 <section id="usage-example">
 <h2>Usage Example<a class="headerlink" href="#usage-example" title="Permalink to this heading"></a></h2>
 <p>To evaluate a model using the default preset configuration, which evaluates the Wav2Vec2 model on the LibriSpeech dataset using the BLEU metric, run the following command:</p>
-<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="n">fairseq2</span> <span class="n">hg</span> <span class="n">asr</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">output_dir</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fairseq2<span class="w"> </span>hg<span class="w"> </span>asr<span class="w"> </span>/path/to/output_dir
 
-<span class="o">...</span>
-<span class="p">[</span><span class="mi">08</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">24</span> <span class="mi">20</span><span class="p">:</span><span class="mi">23</span><span class="p">:</span><span class="mi">56</span><span class="p">]</span> <span class="n">INFO</span>     <span class="n">fairseq2</span><span class="o">.</span><span class="n">recipes</span><span class="o">.</span><span class="n">hg</span><span class="o">.</span><span class="n">evaluator</span> <span class="o">-</span> <span class="n">Running</span> <span class="n">evaluation</span> <span class="n">on</span> <span class="mi">1</span> <span class="n">device</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span>
-<span class="p">[</span><span class="mi">08</span><span class="o">/</span><span class="mi">11</span><span class="o">/</span><span class="mi">24</span> <span class="mi">20</span><span class="p">:</span><span class="mi">24</span><span class="p">:</span><span class="mi">22</span><span class="p">]</span> <span class="n">INFO</span>     <span class="n">fairseq2</span><span class="o">.</span><span class="n">recipes</span><span class="o">.</span><span class="n">hg</span><span class="o">.</span><span class="n">evaluator</span> <span class="o">-</span> <span class="n">Eval</span> <span class="n">Metrics</span> <span class="o">-</span> <span class="n">BLEU</span><span class="p">:</span> <span class="mf">0.597487</span> <span class="o">|</span> <span class="n">Elapsed</span> <span class="n">Time</span><span class="p">:</span> <span class="mi">26</span><span class="n">s</span> <span class="o">|</span> <span class="n">Wall</span> <span class="n">Time</span><span class="p">:</span> <span class="mi">27</span><span class="n">s</span> <span class="o">|</span> <span class="n">brevity_penalty</span><span class="p">:</span> <span class="mf">0.9428731438548749</span> <span class="o">|</span>
-                             <span class="n">length_ratio</span><span class="p">:</span> <span class="mf">0.9444444444444444</span> <span class="o">|</span> <span class="n">precisions</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8235294117647058</span><span class="p">,</span> <span class="mf">0.6666666666666666</span><span class="p">,</span> <span class="mf">0.5384615384615384</span><span class="p">,</span> <span class="mf">0.5454545454545454</span><span class="p">]</span> <span class="o">|</span>
-                             <span class="n">reference_length</span><span class="p">:</span> <span class="mi">18</span> <span class="o">|</span> <span class="n">translation_length</span><span class="p">:</span> <span class="mi">17</span>
-                    <span class="n">INFO</span>     <span class="n">fairseq2</span><span class="o">.</span><span class="n">recipes</span><span class="o">.</span><span class="n">hg</span><span class="o">.</span><span class="n">evaluator</span> <span class="o">-</span> <span class="n">Evaluation</span> <span class="n">complete</span> <span class="ow">in</span> <span class="mi">27</span> <span class="n">seconds</span>
+...
+<span class="o">[</span><span class="m">08</span>/11/24<span class="w"> </span><span class="m">20</span>:23:56<span class="o">]</span><span class="w"> </span>INFO<span class="w">     </span>fairseq2.recipes.hg.evaluator<span class="w"> </span>-<span class="w"> </span>Running<span class="w"> </span>evaluation<span class="w"> </span>on<span class="w"> </span><span class="m">1</span><span class="w"> </span>device<span class="o">(</span>s<span class="o">)</span>.
+<span class="o">[</span><span class="m">08</span>/11/24<span class="w"> </span><span class="m">20</span>:24:22<span class="o">]</span><span class="w"> </span>INFO<span class="w">     </span>fairseq2.recipes.hg.evaluator<span class="w"> </span>-<span class="w"> </span>Eval<span class="w"> </span>Metrics<span class="w"> </span>-<span class="w"> </span>BLEU:<span class="w"> </span><span class="m">0</span>.597487<span class="w"> </span><span class="p">|</span><span class="w"> </span>Elapsed<span class="w"> </span>Time:<span class="w"> </span>26s<span class="w"> </span><span class="p">|</span><span class="w"> </span>Wall<span class="w"> </span>Time:<span class="w"> </span>27s<span class="w"> </span><span class="p">|</span><span class="w"> </span>brevity_penalty:<span class="w"> </span><span class="m">0</span>.9428731438548749<span class="w"> </span><span class="p">|</span>
+<span class="w">                             </span>length_ratio:<span class="w"> </span><span class="m">0</span>.9444444444444444<span class="w"> </span><span class="p">|</span><span class="w"> </span>precisions:<span class="w"> </span><span class="o">[</span><span class="m">0</span>.8235294117647058,<span class="w"> </span><span class="m">0</span>.6666666666666666,<span class="w"> </span><span class="m">0</span>.5384615384615384,<span class="w"> </span><span class="m">0</span>.5454545454545454<span class="o">]</span><span class="w"> </span><span class="p">|</span>
+<span class="w">                             </span>reference_length:<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>translation_length:<span class="w"> </span><span class="m">17</span>
+<span class="w">                    </span>INFO<span class="w">     </span>fairseq2.recipes.hg.evaluator<span class="w"> </span>-<span class="w"> </span>Evaluation<span class="w"> </span><span class="nb">complete</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">27</span><span class="w"> </span>seconds
 </pre></div>
 </div>
 <p><strong>Overriding Default Configuration:</strong></p>
 <p>You can override the default configuration by specifying parameters directly or a config file. For example, to use a different model or adjust evaluation settings, modify your command as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>fairseq2<span class="w"> </span>hg<span class="w"> </span>asr<span class="w"> </span>/tmp/fairseq2/<span class="w"> </span>--config<span class="w"> </span><span class="nv">max_samples</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">model_name</span><span class="o">=</span>openai/whisper-tiny.en<span class="w"> </span><span class="nv">dtype</span><span class="o">=</span>torch.float32
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>fairseq2<span class="w"> </span>hg<span class="w"> </span>asr<span class="w"> </span>/tmp/fairseq2/<span class="w"> </span>--config<span class="w"> </span><span class="nv">max_samples</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">model_name</span><span class="o">=</span>openai/whisper-tiny.en<span class="w"> </span><span class="nv">dtype</span><span class="o">=</span>torch.float32
 
 ...
 <span class="o">[</span><span class="m">08</span>/11/24<span class="w"> </span><span class="m">20</span>:30:35<span class="o">]</span><span class="w"> </span>INFO<span class="w">     </span>fairseq2.recipes.hg.evaluator<span class="w"> </span>-<span class="w"> </span>Eval<span class="w"> </span>Metrics<span class="w"> </span>-<span class="w"> </span>BLEU:<span class="w"> </span><span class="m">0</span>.468458<span class="w"> </span><span class="p">|</span><span class="w"> </span>Elapsed<span class="w"> </span>Time:<span class="w"> </span>3s<span class="w"> </span><span class="p">|</span><span class="w"> </span>Wall<span class="w"> </span>Time:<span class="w"> </span>4s<span class="w"> </span><span class="p">|</span><span class="w"> </span>brevity_penalty:<span class="w"> </span><span class="m">1</span>.0<span class="w"> </span><span class="p">|</span><span class="w"> </span>length_ratio:
@@ -216,7 +213,7 @@
 <h2>ASR Evaluation<a class="headerlink" href="#asr-evaluation" title="Permalink to this heading"></a></h2>
 <p>The module includes specific functionality for ASR evaluation. It supports evaluation of ASR models on Hugging Face datasets, including Wav2Vec2 and Whisper models.</p>
 <p><strong>Configuration:</strong></p>
-<p>The <cite>AsrEvalConfig</cite> class holds the configuration for ASR evaluation. It defines parameters for data processing, model evaluation, and other settings.</p>
+<p>The <cite>AsrEvalConfig</cite> class holds the configuration for ASR evaluation. It defines parameters for data processing, model evaluation, and other settings. The configuration can be overridden through the command line or a configuration file.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="fairseq2.recipes.hg.asr_eval.AsrEvalConfig">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fairseq2.recipes.hg.asr_eval.</span></span><span class="sig-name descname"><span class="pre">AsrEvalConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'librispeech_asr'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_audio_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_audio_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">800000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_num_elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3200000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize_audio</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_prefetch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkpoint_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">torch.float16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fairseq2/recipes/hg/asr_eval.html#AsrEvalConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fairseq2.recipes.hg.asr_eval.AsrEvalConfig" title="Permalink to this definition"></a></dt>
@@ -299,156 +296,44 @@ e.g. for debugging. Default is None, meaning all samples will be evaluated</p>
 
 </dd></dl>
 
-<p>The configuration can be overridden through the command line or a configuration file.</p>
 <p><strong>Data Processing:</strong></p>
-<dl class="py function">
-<dt class="sig sig-object py" id="fairseq2.recipes.hg.asr_eval.extract_features">
-<span class="sig-prename descclassname"><span class="pre">fairseq2.recipes.hg.asr_eval.</span></span><span class="sig-name descname"><span class="pre">extract_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">example</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fairseq2/recipes/hg/asr_eval.html#extract_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fairseq2.recipes.hg.asr_eval.extract_features" title="Permalink to this definition"></a></dt>
-<dd><p>Extracts source and target features from dataset examples.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>example (dict): A dictionary containing source and target keys.</p>
-</dd>
-<dt>Returns:</dt><dd><p>dict: A dictionary containing the extracted features.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><em>Any</em></a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="fairseq2.recipes.hg.asr_eval.to_batch">
-<span class="sig-prename descclassname"><span class="pre">fairseq2.recipes.hg.asr_eval.</span></span><span class="sig-name descname"><span class="pre">to_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">examples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fairseq2/recipes/hg/asr_eval.html#to_batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fairseq2.recipes.hg.asr_eval.to_batch" title="Permalink to this definition"></a></dt>
-<dd><p>Converts a collated batch of examples into a Seq2SeqBatch.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>examples (dict): A dictionary containing “audio” and “text” keys.</p>
-</dd>
-<dt>Returns:</dt><dd><p>Seq2SeqBatch: A batch of audio and text sequences.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>Seq2SeqBatch</em></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="fairseq2.recipes.hg.asr_eval.prepare_dataset">
-<span class="sig-prename descclassname"><span class="pre">fairseq2.recipes.hg.asr_eval.</span></span><span class="sig-name descname"><span class="pre">prepare_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fairseq2/recipes/hg/asr_eval.html#prepare_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fairseq2.recipes.hg.asr_eval.prepare_dataset" title="Permalink to this definition"></a></dt>
-<dd><p>Prepares a dataset for evaluation. The dataset is loaded from the
-HF datasets and preprocessed using the provided processor.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>config (AsrEvalConfig): The configuration for the evaluation.
-processor (Callable): A function to preprocess examples.</p>
-</dd>
-<dt>Returns:</dt><dd><p>Dataset: The prepared dataset.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>Dataset</em></p>
-</dd>
-</dl>
-</dd></dl>
-
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.extract_features.html#fairseq2.recipes.hg.asr_eval.extract_features" title="fairseq2.recipes.hg.asr_eval.extract_features"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extract_features</span></code></a>(example)</p></td>
+<td><p>Extracts source and target features from dataset examples.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.to_batch.html#fairseq2.recipes.hg.asr_eval.to_batch" title="fairseq2.recipes.hg.asr_eval.to_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_batch</span></code></a>(examples, model_type, device)</p></td>
+<td><p>Converts a collated batch of examples into a Seq2SeqBatch.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.prepare_dataset.html#fairseq2.recipes.hg.asr_eval.prepare_dataset" title="fairseq2.recipes.hg.asr_eval.prepare_dataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_dataset</span></code></a>(config[, processor])</p></td>
+<td><p>Prepares a dataset for evaluation.</p></td>
+</tr>
+</tbody>
+</table>
 <p><strong>Evaluation Functions:</strong></p>
-<dl class="py function">
-<dt class="sig sig-object py" id="fairseq2.recipes.hg.asr_eval.load_asr_evaluator">
-<span class="sig-prename descclassname"><span class="pre">fairseq2.recipes.hg.asr_eval.</span></span><span class="sig-name descname"><span class="pre">load_asr_evaluator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fairseq2/recipes/hg/asr_eval.html#load_asr_evaluator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fairseq2.recipes.hg.asr_eval.load_asr_evaluator" title="Permalink to this definition"></a></dt>
-<dd><p>Load the evaluator based on the model type.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>config (AsrEvalConfig): The configuration for the evaluation.
-output_dir (Path): The output directory to store the evaluation results.</p>
-</dd>
-<dt>Returns:</dt><dd><p>HFEvaluator: Evaluation process.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>HFEvaluator</em>[<em>Seq2SeqBatch</em>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator">
-<span class="sig-prename descclassname"><span class="pre">fairseq2.recipes.hg.asr_eval.</span></span><span class="sig-name descname"><span class="pre">load_wav2vec2_asr_evaluator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fairseq2/recipes/hg/asr_eval.html#load_wav2vec2_asr_evaluator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator" title="Permalink to this definition"></a></dt>
-<dd><p>Load the evaluator used for downstream evaluation of the wav2vec2 model.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>config (HFEvalConfig): The configuration for the evaluation.
-output_dir (Path): The output directory to store the evaluation results.</p>
-</dd>
-<dt>Returns:</dt><dd><p>HFEvaluator: Evaluation process.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>HFEvaluator</em>[<em>Seq2SeqBatch</em>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator">
-<span class="sig-prename descclassname"><span class="pre">fairseq2.recipes.hg.asr_eval.</span></span><span class="sig-name descname"><span class="pre">load_hg_asr_evaluator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fairseq2/recipes/hg/asr_eval.html#load_hg_asr_evaluator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator" title="Permalink to this definition"></a></dt>
-<dd><p>Load the evaluator used for downstream evaluation of the whisper model</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>config (HFEvalConfig): The configuration for the evaluation.
-output_dir (Path): The output directory to store the evaluation results.</p>
-</dd>
-<dt>Returns:</dt><dd><p>HFEvaluator: Evaluation process.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>HFEvaluator</em>[<em>Seq2SeqBatch</em>]</p>
-</dd>
-</dl>
-</dd></dl>
-
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_asr_evaluator.html#fairseq2.recipes.hg.asr_eval.load_asr_evaluator" title="fairseq2.recipes.hg.asr_eval.load_asr_evaluator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_asr_evaluator</span></code></a>(config, output_dir)</p></td>
+<td><p>Load the evaluator based on the model type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator.html#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator" title="fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_wav2vec2_asr_evaluator</span></code></a>(config, output_dir)</p></td>
+<td><p>Load the evaluator used for downstream evaluation of the wav2vec2 model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hg/evaluation_functions/fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator.html#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator" title="fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_hg_asr_evaluator</span></code></a>(config, output_dir)</p></td>
+<td><p>Load the evaluator used for downstream evaluation of the whisper model</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="utilities">
 <h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this heading"></a></h2>
-<p>The <cite>create_hf_reader</cite> function converts a Hugging Face Dataset into a Fairseq2 <cite>DataPipelineReader</cite>.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="fairseq2.recipes.hg.dataset.create_hf_reader">
-<span class="sig-prename descclassname"><span class="pre">fairseq2.recipes.hg.dataset.</span></span><span class="sig-name descname"><span class="pre">create_hf_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converter</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batching</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_seq_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_remainder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_seq_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seq_len_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_accumulate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_prefetch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">extra</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/fairseq2/recipes/hg/dataset.html#create_hf_reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#fairseq2.recipes.hg.dataset.create_hf_reader" title="Permalink to this definition"></a></dt>
-<dd><p>Convert HF Dataset into a fairseq2 PipelineReader.
-The HF-specific processing logic is assumed to be
-done before the conversion.</p>
-<p><strong>NOTE</strong>: This function should not be used for big datatset, but
-as a convenient wrapper over some small HuggingFace datasets for
-quick iteration.</p>
-<p><strong>Batching</strong>:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>gang</strong> (<a class="reference internal" href="generated/abc/fairseq2.gang.Gang.html#fairseq2.gang.Gang" title="fairseq2.gang.Gang"><em>Gang</em></a>) – The gang over which to shard the dataset.</p></li>
-<li><p><strong>batching</strong> (<em>StaticBatching</em><em> | </em><em>LengthBatching</em><em> | </em><em>None</em>) – The batching strategy that is used to transform the pipeline
-into iteration of batch of items. If None, The batching is
-done externally using the datasets API.</p></li>
-<li><p><strong>drop_remainder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Whether or not drop the remainder items that do not fit the
-batching strategy (e.g. not having the batch size)</p></li>
-<li><p><strong>max_seq_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a><em> | </em><em>None</em>) – used when batching by length, to define the cap of the batch</p></li>
-<li><p><strong>min_seq_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – used to filter the items with too short length</p></li>
-<li><p><strong>seq_len_col</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em> | </em><em>None</em>) – The column storing example’s length</p></li>
-<li><p><strong>num_accumulate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The number of batches to accumulate in each iteration.
-Typically used with gradient accumulation during
-training.</p></li>
-<li><p><strong>num_prefetch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The number of batches to prefetch in background.</p></li>
-<li><p><strong>extras</strong> – The extra parameters specific to the dataset
-implementation.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>DataPipelineReader</em>[<em>BatchT</em>]</p>
-</dd>
-</dl>
-</dd></dl>
-
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/hg/utilities/fairseq2.recipes.hg.dataset.create_hf_reader.html#fairseq2.recipes.hg.dataset.create_hf_reader" title="fairseq2.recipes.hg.dataset.create_hf_reader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_hf_reader</span></code></a>(dataset, gang, converter, *)</p></td>
+<td><p>Convert HF Dataset into a fairseq2 PipelineReader.</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="extending-the-framework">
 <h2>Extending the Framework<a class="headerlink" href="#extending-the-framework" title="Permalink to this heading"></a></h2>
@@ -461,7 +346,7 @@ implementation.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="generated/data/fairseq2.assets.AssetMetadataProvider.html" class="btn btn-neutral float-left" title="AssetMetadataProvider" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="all.html" class="btn btn-neutral float-right" title="All" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="generated/hg/data_processing/fairseq2.recipes.hg.asr_eval.extract_features.html" class="btn btn-neutral float-right" title="extract_features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
