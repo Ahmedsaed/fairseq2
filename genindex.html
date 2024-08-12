@@ -126,7 +126,16 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/hg.html">Hugging Face Recipes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reference/hg.html#usage-example">Usage Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/hg.html#asr-evaluation">ASR Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/hg.html#asr-evaluation">ASR Evaluation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig"><code class="docutils literal notranslate"><span class="pre">AsrEvalConfig</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/hg.html#fairseq2.recipes.hg.asr_eval.extract_features"><code class="docutils literal notranslate"><span class="pre">extract_features()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/hg.html#fairseq2.recipes.hg.asr_eval.to_batch"><code class="docutils literal notranslate"><span class="pre">to_batch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/hg.html#fairseq2.recipes.hg.asr_eval.prepare_dataset"><code class="docutils literal notranslate"><span class="pre">prepare_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/hg.html#fairseq2.recipes.hg.asr_eval.load_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_asr_evaluator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/hg.html#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_wav2vec2_asr_evaluator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference/hg.html#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_hg_asr_evaluator()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="reference/hg.html#utilities">Utilities</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="reference/hg.html#fairseq2.recipes.hg.dataset.create_hf_reader"><code class="docutils literal notranslate"><span class="pre">create_hf_reader()</span></code></a></li>
 </ul>
@@ -235,6 +244,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/abc/fairseq2.gang.Gang.html#fairseq2.gang.Gang.as_process_group">as_process_group() (fairseq2.gang.Gang method)</a>
 </li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig">AsrEvalConfig (class in fairseq2.recipes.hg.asr_eval)</a>
+</li>
       <li><a href="reference/generated/data/fairseq2.assets.AssetCard.html#fairseq2.assets.AssetCard">AssetCard (class in fairseq2.assets)</a>
 </li>
       <li><a href="reference/generated/data/fairseq2.assets.AssetMetadataProvider.html#fairseq2.assets.AssetMetadataProvider">AssetMetadataProvider (class in fairseq2.assets)</a>
@@ -271,6 +282,8 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.checkpoint_dir">checkpoint_dir (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
+</li>
       <li><a href="reference/generated/data/fairseq2.assets.AssetMetadataProvider.html#fairseq2.assets.AssetMetadataProvider.clear_cache">clear_cache() (fairseq2.assets.AssetMetadataProvider method)</a>
 </li>
       <li><a href="reference/generated/abc/fairseq2.gang.Gang.html#fairseq2.gang.Gang.close">close() (fairseq2.gang.Gang method)</a>
@@ -283,10 +296,10 @@
 </li>
       <li><a href="reference/generated/data/fairseq2.data.DataPipeline.html#fairseq2.data.DataPipeline.concat">concat() (fairseq2.data.DataPipeline static method)</a>
 </li>
-      <li><a href="reference/generated/data/fairseq2.data.DataPipeline.html#fairseq2.data.DataPipeline.constant">constant() (fairseq2.data.DataPipeline static method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/generated/data/fairseq2.data.DataPipeline.html#fairseq2.data.DataPipeline.constant">constant() (fairseq2.data.DataPipeline static method)</a>
+</li>
       <li><a href="reference/generated/classes/fairseq2.optim.lr_scheduler.CosineAnnealingLR.html#fairseq2.optim.lr_scheduler.CosineAnnealingLR">CosineAnnealingLR (class in fairseq2.optim.lr_scheduler)</a>
 </li>
       <li><a href="reference/generated/data/fairseq2.data.DataPipeline.html#fairseq2.data.DataPipeline.count">count() (fairseq2.data.DataPipeline static method)</a>
@@ -313,6 +326,8 @@
 </li>
       <li><a href="reference/generated/data/fairseq2.data.DataPipelineError.html#fairseq2.data.DataPipelineError">DataPipelineError</a>
 </li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.dataset_name">dataset_name (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/data_text/fairseq2.data.text.SentencePieceDecoder.html#fairseq2.data.text.SentencePieceDecoder.decode_from_tokens">decode_from_tokens() (fairseq2.data.text.SentencePieceDecoder method)</a>
@@ -322,6 +337,8 @@
 </li>
       </ul></li>
       <li><a href="reference/generated/abc/fairseq2.gang.Gang.html#fairseq2.gang.Gang.device">device (fairseq2.gang.Gang property)</a>
+</li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.dtype">dtype (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
 </li>
       <li><a href="reference/generated/data/fairseq2.data.DataPipelineBuilder.html#fairseq2.data.DataPipelineBuilder.dynamic_bucket">dynamic_bucket() (fairseq2.data.DataPipelineBuilder method)</a>
 </li>
@@ -340,6 +357,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/data/fairseq2.data.VocabularyInfo.html#fairseq2.data.VocabularyInfo.eos_idx">eos_idx (fairseq2.data.VocabularyInfo attribute)</a>
+</li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.extract_features">extract_features() (in module fairseq2.recipes.hg.asr_eval)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -399,6 +418,10 @@
 </li>
       <li><a href="reference/generated/data/fairseq2.data.list_files.html#fairseq2.data.list_files">list_files() (in module fairseq2.data)</a>
 </li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.load_asr_evaluator">load_asr_evaluator() (in module fairseq2.recipes.hg.asr_eval)</a>
+</li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator">load_hg_asr_evaluator() (in module fairseq2.recipes.hg.asr_eval)</a>
+</li>
       <li><a href="reference/generated/data/fairseq2.data.DataPipeline.html#fairseq2.data.DataPipeline.load_state_dict">load_state_dict() (fairseq2.data.DataPipeline method)</a>
 
       <ul>
@@ -412,6 +435,10 @@
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator">load_wav2vec2_asr_evaluator() (in module fairseq2.recipes.hg.asr_eval)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="M">M</h2>
@@ -419,9 +446,19 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/data/fairseq2.data.DataPipelineBuilder.html#fairseq2.data.DataPipelineBuilder.map">map() (fairseq2.data.DataPipelineBuilder method)</a>
 </li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.max_audio_len">max_audio_len (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
+</li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.max_num_elements">max_num_elements (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
+</li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.max_samples">max_samples (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/data/fairseq2.assets.AssetCard.html#fairseq2.assets.AssetCard.metadata">metadata (fairseq2.assets.AssetCard property)</a>
+</li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.min_audio_len">min_audio_len (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
+</li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.model_name">model_name (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
 </li>
       <li><a href="reference/generated/classes/fairseq2.optim.lr_scheduler.MyleLR.html#fairseq2.optim.lr_scheduler.MyleLR">MyleLR (class in fairseq2.optim.lr_scheduler)</a>
 </li>
@@ -433,9 +470,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/data/fairseq2.assets.AssetCard.html#fairseq2.assets.AssetCard.name">name (fairseq2.assets.AssetCard property)</a>
 </li>
+      <li><a href="reference/generated/classes/fairseq2.optim.lr_scheduler.NoamLR.html#fairseq2.optim.lr_scheduler.NoamLR">NoamLR (class in fairseq2.optim.lr_scheduler)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="reference/generated/classes/fairseq2.optim.lr_scheduler.NoamLR.html#fairseq2.optim.lr_scheduler.NoamLR">NoamLR (class in fairseq2.optim.lr_scheduler)</a>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.normalize_audio">normalize_audio (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
+</li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.num_prefetch">num_prefetch (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -463,6 +504,8 @@
         <li><a href="reference/generated/data_text/fairseq2.data.text.TextTokenEncoder.html#fairseq2.data.text.TextTokenEncoder.prefix_indices">(fairseq2.data.text.TextTokenEncoder property)</a>
 </li>
       </ul></li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.prepare_dataset">prepare_dataset() (in module fairseq2.recipes.hg.asr_eval)</a>
+</li>
       <li><a href="reference/generated/classes/fairseq2.optim.lr_scheduler.CosineAnnealingLR.html#fairseq2.optim.lr_scheduler.CosineAnnealingLR.print_lr">print_lr() (fairseq2.optim.lr_scheduler.CosineAnnealingLR method)</a>
 
       <ul>
@@ -527,6 +570,8 @@
       </ul></li>
       <li><a href="reference/generated/data/fairseq2.data.DataPipelineBuilder.html#fairseq2.data.DataPipelineBuilder.skip">skip() (fairseq2.data.DataPipelineBuilder method)</a>
 </li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.split">split (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/data/fairseq2.data.DataPipeline.html#fairseq2.data.DataPipeline.state_dict">state_dict() (fairseq2.data.DataPipeline method)</a>
@@ -565,11 +610,15 @@
 </li>
       <li><a href="reference/generated/data_text/fairseq2.data.text.TextTokenEncoder.html#fairseq2.data.text.TextTokenEncoder">TextTokenEncoder (class in fairseq2.data.text)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="reference/generated/data_text/fairseq2.data.text.TextTokenizer.html#fairseq2.data.text.TextTokenizer">TextTokenizer (class in fairseq2.data.text)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.to_batch">to_batch() (in module fairseq2.recipes.hg.asr_eval)</a>
+</li>
       <li><a href="reference/generated/functions/fairseq2.nn.utils.mask.to_float_mask.html#fairseq2.nn.utils.mask.to_float_mask">to_float_mask() (in module fairseq2.nn.utils.mask)</a>
+</li>
+      <li><a href="reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig.tokenizer_name">tokenizer_name (fairseq2.recipes.hg.asr_eval.AsrEvalConfig attribute)</a>
 </li>
       <li><a href="reference/generated/enums/fairseq2.nn.transformer.TransformerNormOrder.html#fairseq2.nn.transformer.TransformerNormOrder">TransformerNormOrder (class in fairseq2.nn.transformer)</a>
 </li>

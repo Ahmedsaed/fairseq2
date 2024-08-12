@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fairseq2.recipes.hg.asr_eval &mdash; fairseq2 0.3.0.dev0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            fairseq2
+          </a>
+              <div class="version">
+                0.3.0.dev0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">fairseq2 Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/data.html">fairseq2.data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.DataPipeline.html">DataPipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.DataPipeline.html#fairseq2.data.DataPipeline"><code class="docutils literal notranslate"><span class="pre">DataPipeline</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.DataPipelineBuilder.html">DataPipelineBuilder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.DataPipelineBuilder.html#fairseq2.data.DataPipelineBuilder"><code class="docutils literal notranslate"><span class="pre">DataPipelineBuilder</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.list_files.html">list_files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.list_files.html#fairseq2.data.list_files"><code class="docutils literal notranslate"><span class="pre">list_files()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.read_sequence.html">read_sequence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.read_sequence.html#fairseq2.data.read_sequence"><code class="docutils literal notranslate"><span class="pre">read_sequence()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.read_zipped_records.html">read_zipped_records</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.read_zipped_records.html#fairseq2.data.read_zipped_records"><code class="docutils literal notranslate"><span class="pre">read_zipped_records()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.text.read_text.html">read_text</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.text.read_text.html#fairseq2.data.text.read_text"><code class="docutils literal notranslate"><span class="pre">read_text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.FileMapper.html">FileMapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.FileMapper.html#fairseq2.data.FileMapper"><code class="docutils literal notranslate"><span class="pre">FileMapper</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.Collater.html">Collater</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.Collater.html#fairseq2.data.Collater"><code class="docutils literal notranslate"><span class="pre">Collater</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.CollateOptionsOverride.html">CollateOptionsOverride</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.CollateOptionsOverride.html#fairseq2.data.CollateOptionsOverride"><code class="docutils literal notranslate"><span class="pre">CollateOptionsOverride</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/data.html#column-syntax">Column syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/data.html#pseudo-infinite-and-infinite-pipelines">Pseudo-infinite and Infinite Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/data.html#public-classes-used-in-fairseq2-api">Public classes used in fairseq2 API:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.ByteStreamError.html">fairseq2.data.ByteStreamError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.DataPipelineError.html">fairseq2.data.DataPipelineError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.RecordError.html">fairseq2.data.RecordError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.VocabularyInfo.html">VocabularyInfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.data.get_last_failed_example.html">get_last_failed_example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/data.html#fairseq2-data-text">fairseq2.data.text</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.TextTokenizer.html">TextTokenizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.TextTokenDecoder.html">TextTokenDecoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.TextTokenEncoder.html">TextTokenEncoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.StrSplitter.html">StrSplitter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.StrToIntConverter.html">StrToIntConverter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.StrToTensorConverter.html">StrToTensorConverter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.SentencePieceModel.html">SentencePieceModel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.SentencePieceEncoder.html">SentencePieceEncoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.SentencePieceDecoder.html">SentencePieceDecoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.vocab_info_from_sentencepiece.html">vocab_info_from_sentencepiece</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data_text/fairseq2.data.text.LineEnding.html">LineEnding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/asset.html">fairseq2.assets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.assets.AssetStore.html">AssetStore</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.assets.AssetStore.html#fairseq2.assets.AssetStore"><code class="docutils literal notranslate"><span class="pre">AssetStore</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.assets.AssetCard.html">AssetCard</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.assets.AssetCard.html#fairseq2.assets.AssetCard"><code class="docutils literal notranslate"><span class="pre">AssetCard</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.assets.AssetMetadataProvider.html">AssetMetadataProvider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/generated/data/fairseq2.assets.AssetMetadataProvider.html#fairseq2.assets.AssetMetadataProvider"><code class="docutils literal notranslate"><span class="pre">AssetMetadataProvider</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/asset.html#model-store">Model store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/asset.html#model-card">Model card</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/hg.html">Hugging Face Recipes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/hg.html#usage-example">Usage Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/hg.html#asr-evaluation">ASR Evaluation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig"><code class="docutils literal notranslate"><span class="pre">AsrEvalConfig</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.extract_features"><code class="docutils literal notranslate"><span class="pre">extract_features()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.to_batch"><code class="docutils literal notranslate"><span class="pre">to_batch()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.prepare_dataset"><code class="docutils literal notranslate"><span class="pre">prepare_dataset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_asr_evaluator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_wav2vec2_asr_evaluator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator"><code class="docutils literal notranslate"><span class="pre">load_hg_asr_evaluator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/hg.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../reference/hg.html#fairseq2.recipes.hg.dataset.create_hf_reader"><code class="docutils literal notranslate"><span class="pre">create_hf_reader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/hg.html#extending-the-framework">Extending the Framework</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/all.html">All</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Misc</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bibliography.html">Bibliography</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">fairseq2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">fairseq2.recipes.hg.asr_eval</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for fairseq2.recipes.hg.asr_eval</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (c) Meta Platforms, Inc. and affiliates.</span>
+<span class="c1"># All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># This source code is licensed under the BSD-style license found in the</span>
+<span class="c1"># LICENSE file in the root directory of this source tree.</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># type: ignore[attr-defined,import-untyped,import-not-found]</span>
+    <span class="n">Dataset</span><span class="p">,</span>
+    <span class="n">load_dataset</span><span class="p">,</span>
+    <span class="n">load_dataset_builder</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span>  <span class="c1"># type: ignore[attr-defined,import-untyped,import-not-found]</span>
+    <span class="n">WhisperForConditionalGeneration</span><span class="p">,</span>
+    <span class="n">WhisperProcessor</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">fairseq2.assets.metadata_provider</span> <span class="kn">import</span> <span class="n">AssetNotFoundError</span>
+<span class="kn">from</span> <span class="nn">fairseq2.config_registry</span> <span class="kn">import</span> <span class="n">ConfigRegistry</span>
+<span class="kn">from</span> <span class="nn">fairseq2.data.data_pipeline</span> <span class="kn">import</span> <span class="n">SequenceData</span>
+<span class="kn">from</span> <span class="nn">fairseq2.data.text</span> <span class="kn">import</span> <span class="n">load_text_tokenizer</span>
+<span class="kn">from</span> <span class="nn">fairseq2.data.text.text_tokenizer</span> <span class="kn">import</span> <span class="n">TextTokenizer</span>
+<span class="kn">from</span> <span class="nn">fairseq2.datasets.batching</span> <span class="kn">import</span> <span class="n">StaticBatching</span>
+<span class="kn">from</span> <span class="nn">fairseq2.logging</span> <span class="kn">import</span> <span class="n">get_log_writer</span>
+<span class="kn">from</span> <span class="nn">fairseq2.models.model</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">fairseq2.models.seq2seq</span> <span class="kn">import</span> <span class="n">Seq2SeqBatch</span>
+<span class="kn">from</span> <span class="nn">fairseq2.models.sequence</span> <span class="kn">import</span> <span class="n">SequenceBatch</span>
+<span class="kn">from</span> <span class="nn">fairseq2.models.wav2vec2.asr</span> <span class="kn">import</span> <span class="n">load_wav2vec2_asr_model</span>
+<span class="kn">from</span> <span class="nn">fairseq2.nn.padding</span> <span class="kn">import</span> <span class="n">get_seqs_and_padding_mask</span>
+<span class="kn">from</span> <span class="nn">fairseq2.recipes.hg.dataset</span> <span class="kn">import</span> <span class="n">Example</span><span class="p">,</span> <span class="n">create_hf_reader</span>
+<span class="kn">from</span> <span class="nn">fairseq2.recipes.hg.evaluator</span> <span class="kn">import</span> <span class="n">HFEvaluator</span>
+<span class="kn">from</span> <span class="nn">fairseq2.recipes.utils.asset</span> <span class="kn">import</span> <span class="n">retrieve_asset_card</span>
+<span class="kn">from</span> <span class="nn">fairseq2.recipes.utils.setup</span> <span class="kn">import</span> <span class="n">setup_root_gang</span>
+<span class="kn">from</span> <span class="nn">fairseq2.typing</span> <span class="kn">import</span> <span class="n">META</span><span class="p">,</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">Device</span>
+<span class="kn">from</span> <span class="nn">fairseq2.utils.profiler</span> <span class="kn">import</span> <span class="n">Stopwatch</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">get_log_writer</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="AsrEvalConfig"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.AsrEvalConfig">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">kw_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">AsrEvalConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Holds the configuration of a ASR evaluation recipe.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Data</span>
+    <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The HF dataset to evaluate with.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Model</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The name of the model to evaluate.&quot;&quot;&quot;</span>
+
+    <span class="n">tokenizer_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;librispeech_asr&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The tokenizer to use.&quot;&quot;&quot;</span>
+
+    <span class="n">split</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The name of the dataset split to evaluate with.&quot;&quot;&quot;</span>
+
+    <span class="n">min_audio_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The minimum audio sequence length.&quot;&quot;&quot;</span>
+
+    <span class="n">max_audio_len</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">800_000</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The maximum audio sequence length.&quot;&quot;&quot;</span>
+
+    <span class="n">max_num_elements</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3_200_000</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The maximum number of elements per batch.&quot;&quot;&quot;</span>
+
+    <span class="n">normalize_audio</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;If ``True``, normalizes audio to have zero mean and unit variance.&quot;&quot;&quot;</span>
+
+    <span class="n">max_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Maximum number of samples from the dataset to be evaluated. Used</span>
+<span class="sd">    e.g. for debugging. Default is None, meaning all samples will be evaluated&quot;&quot;&quot;</span>
+
+    <span class="n">num_prefetch</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The number of batches to prefetch in background.&quot;&quot;&quot;</span>
+
+    <span class="n">checkpoint_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The checkpoint directory containing models saved by a :class:`FileCheckpointManager`.&quot;&quot;&quot;</span>
+
+    <span class="n">dtype</span><span class="p">:</span> <span class="n">DataType</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">float16</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The data type of the model.&quot;&quot;&quot;</span></div>
+
+
+<span class="n">asr_eval_presets</span> <span class="o">=</span> <span class="n">ConfigRegistry</span><span class="p">[</span><span class="n">AsrEvalConfig</span><span class="p">]()</span>
+<span class="n">asr_eval_preset</span> <span class="o">=</span> <span class="n">asr_eval_presets</span><span class="o">.</span><span class="n">decorator</span>
+
+
+<span class="nd">@asr_eval_preset</span><span class="p">(</span><span class="s2">&quot;default_asr&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_default_asr_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AsrEvalConfig</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">AsrEvalConfig</span><span class="p">(</span>
+        <span class="n">dataset_name</span><span class="o">=</span><span class="s2">&quot;librispeech_asr&quot;</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;wav2vec2_asr_base_10h&quot;</span><span class="p">,</span>
+        <span class="n">split</span><span class="o">=</span><span class="s2">&quot;test.other&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="extract_features"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.extract_features">[docs]</a><span class="k">def</span> <span class="nf">extract_features</span><span class="p">(</span><span class="n">example</span><span class="p">:</span> <span class="n">Example</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Example</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extracts source and target features from dataset examples.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        example (dict): A dictionary containing source and target keys.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A dictionary containing the extracted features.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;audio&quot;</span><span class="p">:</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">][</span><span class="s2">&quot;array&quot;</span><span class="p">],</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">example</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()}</span></div>
+
+
+<div class="viewcode-block" id="to_batch"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.to_batch">[docs]</a><span class="k">def</span> <span class="nf">to_batch</span><span class="p">(</span><span class="n">examples</span><span class="p">:</span> <span class="n">Example</span><span class="p">,</span> <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">Device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Seq2SeqBatch</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a collated batch of examples into a Seq2SeqBatch.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        examples (dict): A dictionary containing &quot;audio&quot; and &quot;text&quot; keys.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Seq2SeqBatch: A batch of audio and text sequences.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">source_data</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">SequenceData</span><span class="p">,</span> <span class="n">examples</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">])</span>
+    <span class="n">target_data</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">examples</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;wav2vec2&quot;</span><span class="p">:</span>
+        <span class="n">source_seqs</span><span class="p">,</span> <span class="n">source_padding_mask</span> <span class="o">=</span> <span class="n">get_seqs_and_padding_mask</span><span class="p">(</span><span class="n">source_data</span><span class="p">)</span>
+        <span class="n">source_seqs</span> <span class="o">=</span> <span class="n">source_seqs</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">source_padding_mask</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">source_padding_mask</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="k">if</span> <span class="n">source_padding_mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="o">==</span> <span class="s2">&quot;whisper&quot;</span><span class="p">:</span>
+        <span class="n">source_seqs</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">source_data</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">source_padding_mask</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown model type: </span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">target_seqs</span> <span class="o">=</span> <span class="n">target_data</span>
+    <span class="n">target_padding_mask</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">Seq2SeqBatch</span><span class="p">(</span>
+        <span class="n">source_seqs</span><span class="p">,</span>
+        <span class="n">source_padding_mask</span><span class="p">,</span>
+        <span class="n">target_seqs</span><span class="p">,</span>
+        <span class="n">target_padding_mask</span><span class="p">,</span>
+        <span class="n">examples</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="prepare_dataset"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.prepare_dataset">[docs]</a><span class="k">def</span> <span class="nf">prepare_dataset</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">AsrEvalConfig</span><span class="p">,</span> <span class="n">processor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Example</span><span class="p">],</span> <span class="n">Example</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Prepares a dataset for evaluation. The dataset is loaded from the</span>
+<span class="sd">    HF datasets and preprocessed using the provided processor.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (AsrEvalConfig): The configuration for the evaluation.</span>
+<span class="sd">        processor (Callable): A function to preprocess examples.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dataset: The prepared dataset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">iterable_ds</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">dataset_name</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="n">streaming</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_generator</span><span class="p">(</span>
+        <span class="k">lambda</span><span class="p">:</span> <span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">iterable_ds</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">max_samples</span><span class="p">),</span>
+        <span class="n">features</span><span class="o">=</span><span class="n">iterable_ds</span><span class="o">.</span><span class="n">features</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">extract_features</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">processor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">processor</span><span class="p">)</span>
+
+    <span class="nb">format</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;torch&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;format_kwargs&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">dtype</span><span class="p">},</span>
+    <span class="p">}</span>
+    <span class="n">ds</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span><span class="o">**</span><span class="nb">format</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">ds</span></div>
+
+
+<span class="k">def</span> <span class="nf">evaluator_preprocessor</span><span class="p">(</span><span class="n">batch</span><span class="p">:</span> <span class="n">Seq2SeqBatch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">SequenceBatch</span><span class="p">,</span> <span class="n">SequenceBatch</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">SequenceBatch</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">source_seqs</span><span class="p">,</span> <span class="n">batch</span><span class="o">.</span><span class="n">source_padding_mask</span><span class="p">),</span> <span class="n">SequenceBatch</span><span class="p">(</span>
+        <span class="n">batch</span><span class="o">.</span><span class="n">target_seqs</span><span class="p">,</span> <span class="n">batch</span><span class="o">.</span><span class="n">target_padding_mask</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">evaluator_postprocesser</span><span class="p">(</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">targets</span><span class="p">:</span> <span class="n">SequenceBatch</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">:</span> <span class="n">TextTokenizer</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="n">decoder</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">create_decoder</span><span class="p">()</span>
+    <span class="n">pad_idx</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">vocab_info</span><span class="o">.</span><span class="n">pad_idx</span>
+
+    <span class="n">hypotheses</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">outputs</span><span class="o">.</span><span class="n">generate_hypotheses</span><span class="p">(</span><span class="n">pad_idx</span><span class="o">=</span><span class="n">pad_idx</span><span class="p">)</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="n">decoder</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">hypotheses</span><span class="p">]</span>
+    <span class="n">references</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">targets</span><span class="o">.</span><span class="n">seqs</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">references</span>
+
+
+<div class="viewcode-block" id="load_asr_evaluator"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_asr_evaluator">[docs]</a><span class="k">def</span> <span class="nf">load_asr_evaluator</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">AsrEvalConfig</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HFEvaluator</span><span class="p">[</span><span class="n">Seq2SeqBatch</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load the evaluator based on the model type.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (AsrEvalConfig): The configuration for the evaluation.</span>
+<span class="sd">        output_dir (Path): The output directory to store the evaluation results.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HFEvaluator: Evaluation process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">retrieve_asset_card</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">model_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">load_wav2vec2_asr_evaluator</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">AssetNotFoundError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">load_hg_asr_evaluator</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="load_wav2vec2_asr_evaluator"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_wav2vec2_asr_evaluator">[docs]</a><span class="k">def</span> <span class="nf">load_wav2vec2_asr_evaluator</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">AsrEvalConfig</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HFEvaluator</span><span class="p">[</span><span class="n">Seq2SeqBatch</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load the evaluator used for downstream evaluation of the wav2vec2 model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (HFEvalConfig): The configuration for the evaluation.</span>
+<span class="sd">        output_dir (Path): The output directory to store the evaluation results.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HFEvaluator: Evaluation process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">AsrEvalConfig</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expect AsrEvalConfig, get </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">prepare_dataset</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="n">gang</span> <span class="o">=</span> <span class="n">setup_root_gang</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">gang</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">init_device</span> <span class="o">=</span> <span class="n">gang</span><span class="o">.</span><span class="n">device</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">init_device</span> <span class="o">=</span> <span class="n">META</span>
+
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">load_text_tokenizer</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">tokenizer_name</span><span class="p">)</span>
+
+    <span class="n">pipeline_reader</span> <span class="o">=</span> <span class="n">create_hf_reader</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">ds</span><span class="p">,</span>
+        <span class="n">gang</span><span class="o">=</span><span class="n">gang</span><span class="p">,</span>
+        <span class="n">converter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">to_batch</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;wav2vec2&quot;</span><span class="p">,</span> <span class="n">init_device</span><span class="p">),</span>
+        <span class="n">batching</span><span class="o">=</span><span class="n">StaticBatching</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">max_num_elements</span><span class="p">),</span>
+        <span class="n">num_prefetch</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">num_prefetch</span><span class="p">,</span>
+        <span class="n">pad_value</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">vocab_info</span><span class="o">.</span><span class="n">pad_idx</span><span class="p">,</span>
+        <span class="n">max_seq_len</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">max_audio_len</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">load_wav2vec2_asr_model</span><span class="p">(</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">init_device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="p">)</span>
+
+    <span class="n">wall_watch</span> <span class="o">=</span> <span class="n">Stopwatch</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">init_device</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">HFEvaluator</span><span class="p">[</span><span class="n">Seq2SeqBatch</span><span class="p">](</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bleu&quot;</span><span class="p">],</span>
+        <span class="n">gang</span><span class="o">=</span><span class="n">gang</span><span class="p">,</span>
+        <span class="n">data_reader</span><span class="o">=</span><span class="n">pipeline_reader</span><span class="p">,</span>
+        <span class="n">wall_watch</span><span class="o">=</span><span class="n">wall_watch</span><span class="p">,</span>
+        <span class="n">preprocessor</span><span class="o">=</span><span class="n">evaluator_preprocessor</span><span class="p">,</span>
+        <span class="n">postprocessor</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">evaluator_postprocesser</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">),</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">HGModelWrapper</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">WhisperForConditionalGeneration</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">SequenceBatch</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">seqs</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="load_hg_asr_evaluator"><a class="viewcode-back" href="../../../../reference/hg.html#fairseq2.recipes.hg.asr_eval.load_hg_asr_evaluator">[docs]</a><span class="k">def</span> <span class="nf">load_hg_asr_evaluator</span><span class="p">(</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">AsrEvalConfig</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HFEvaluator</span><span class="p">[</span><span class="n">Seq2SeqBatch</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load the evaluator used for downstream evaluation of the whisper model</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (HFEvalConfig): The configuration for the evaluation.</span>
+<span class="sd">        output_dir (Path): The output directory to store the evaluation results.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HFEvaluator: Evaluation process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">AsrEvalConfig</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expect AsrEvalConfig, get </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">config</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">gang</span> <span class="o">=</span> <span class="n">setup_root_gang</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">gang</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">init_device</span> <span class="o">=</span> <span class="n">gang</span><span class="o">.</span><span class="n">device</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">init_device</span> <span class="o">=</span> <span class="n">META</span>
+
+    <span class="n">processor</span> <span class="o">=</span> <span class="n">WhisperProcessor</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">WhisperForConditionalGeneration</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">model_name</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+        <span class="n">init_device</span>
+    <span class="p">)</span>
+
+    <span class="n">ds_builder</span> <span class="o">=</span> <span class="n">load_dataset_builder</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">dataset_name</span><span class="p">)</span>
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">prepare_dataset</span><span class="p">(</span>
+        <span class="n">config</span><span class="p">,</span>
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;audio&quot;</span><span class="p">:</span> <span class="n">processor</span><span class="p">(</span>
+                <span class="n">x</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">],</span>
+                <span class="n">sampling_rate</span><span class="o">=</span><span class="n">ds_builder</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="s2">&quot;audio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sampling_rate</span><span class="p">,</span>
+                <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">input_features</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+
+    <span class="n">pipeline_reader</span> <span class="o">=</span> <span class="n">create_hf_reader</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">ds</span><span class="p">,</span>
+        <span class="n">gang</span><span class="o">=</span><span class="n">gang</span><span class="p">,</span>
+        <span class="n">converter</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">to_batch</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;whisper&quot;</span><span class="p">,</span> <span class="n">init_device</span><span class="p">),</span>
+        <span class="n">batching</span><span class="o">=</span><span class="n">StaticBatching</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">max_num_elements</span><span class="p">),</span>
+        <span class="n">num_prefetch</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">num_prefetch</span><span class="p">,</span>
+        <span class="n">max_seq_len</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">max_audio_len</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">wall_watch</span> <span class="o">=</span> <span class="n">Stopwatch</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">init_device</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">HFEvaluator</span><span class="p">[</span><span class="n">Seq2SeqBatch</span><span class="p">](</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">cast</span><span class="p">(</span><span class="n">Model</span><span class="p">,</span> <span class="n">HGModelWrapper</span><span class="p">(</span><span class="n">model</span><span class="p">)),</span>
+        <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bleu&quot;</span><span class="p">],</span>
+        <span class="n">gang</span><span class="o">=</span><span class="n">gang</span><span class="p">,</span>
+        <span class="n">data_reader</span><span class="o">=</span><span class="n">pipeline_reader</span><span class="p">,</span>
+        <span class="n">wall_watch</span><span class="o">=</span><span class="n">wall_watch</span><span class="p">,</span>
+        <span class="n">preprocessor</span><span class="o">=</span><span class="n">evaluator_preprocessor</span><span class="p">,</span>
+        <span class="n">postprocessor</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">processor</span><span class="o">.</span><span class="n">batch_decode</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">cast</span><span class="p">(</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">seqs</span><span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<p style="margin-top: 30px"><a href="https://opensource.fb.com/legal/terms">Terms of Use</a>, <a href="https://opensource.fb.com/legal/privacy">Privacy Policy</a></p>
+
+<p>Copyright © Meta Platforms, Inc</p>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
