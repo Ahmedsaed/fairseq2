@@ -6,11 +6,15 @@
 
 from __future__ import annotations
 
-from ast import iter_child_nodes
 from collections.abc import Callable
 from typing import Any
 
-from fairseq2.data.data_pipeline import Collater, create_bucket_sizes, read_iterator, read_sequence
+from fairseq2.data.data_pipeline import (
+    Collater,
+    create_bucket_sizes,
+    read_iterator,
+    read_sequence,
+)
 from fairseq2.datasets.batching import LengthBatching, StaticBatching
 from fairseq2.datasets.data_reader import BatchT, DataPipelineReader
 from fairseq2.gang import Gang
@@ -95,7 +99,9 @@ def create_hf_reader(
                 "got datasets.DatasetDict. Make sure you specify `split` "
                 "when loading the dataset"
             )
-        raise TypeError(f"Expect datasets.Dataset or datasets.IterableDataset type, got {type(dataset)}")
+        raise TypeError(
+            f"Expect datasets.Dataset or datasets.IterableDataset type, got {type(dataset)}"
+        )
 
     if isinstance(dataset, Dataset):
         if batching is None:
@@ -104,14 +110,15 @@ def create_hf_reader(
             data = dataset
         builder = read_sequence(data)
     else:  # IterableDataset
+
         def reset_fn(iterator: IterableDataset) -> IterableDataset:
             return iter(iterator)
-        
+
         builder = read_iterator(
             iterator=iter(dataset),
             reset_fn=reset_fn,
             infinite=False,
-            skip_pickling_check=True
+            skip_pickling_check=True,
         )
 
     # Shard.
