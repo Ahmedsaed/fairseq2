@@ -6,10 +6,11 @@
 
 from __future__ import annotations
 
+from ast import iter_child_nodes
 from collections.abc import Callable
 from typing import Any
 
-from fairseq2.data.data_pipeline import Collater, create_bucket_sizes, read_sequence
+from fairseq2.data.data_pipeline import Collater, create_bucket_sizes, read_iterator, read_sequence
 from fairseq2.datasets.batching import LengthBatching, StaticBatching
 from fairseq2.datasets.data_reader import BatchT, DataPipelineReader
 from fairseq2.gang import Gang
@@ -18,6 +19,8 @@ try:
     from datasets import (  # type: ignore[attr-defined,import-untyped,import-not-found]
         Dataset,
         DatasetDict,
+        IterableDataset,
+        IterableDatasetDict,
     )
 except ImportError:
     has_datasets = False
@@ -28,7 +31,7 @@ Example = dict[str, Any]
 
 
 def create_hf_reader(
-    dataset: "Dataset",
+    dataset: "Dataset" | "IterableDataset",
     gang: Gang,
     converter: Callable[[Example], BatchT],
     *,
@@ -47,9 +50,9 @@ def create_hf_reader(
     The HF-specific processing logic is assumed to be
     done before the conversion.
 
-    **NOTE**: This function should not be used for big datatset, but
-    as a convenient wrapper over some small HuggingFace datasets for
-    quick iteration.
+    **NOTE**: When using this function with large datasets, it is
+    recommended to pass an `IterableDataset` to avoid loading the
+    entire dataset into memory.
 
     **Batching**:
 
@@ -84,21 +87,32 @@ def create_hf_reader(
         )  # fmt: skip
 
     # Make sure the dataset is a proper arrow dataset
-    if not isinstance(dataset, Dataset):
+    if not isinstance(dataset, (Dataset, IterableDataset)):
         # One common mistake is pass a DatasetDict (e.g. with all splits) as inputs
-        if isinstance(dataset, DatasetDict):
+        if isinstance(dataset, (DatasetDict, IterableDatasetDict)):
             raise TypeError(
-                "create_reader() expects input of datasets.Dataset type, "
-                "get datasets.DatasetDict. Make sure you specify `split` "
+                "create_reader() expects input of datasets.Dataset or datasets.IterableDataset type, "
+                "got datasets.DatasetDict. Make sure you specify `split` "
                 "when loading the dataset"
             )
-        raise TypeError(f"Expect datasets.Dataset type, get {type(dataset)}")
+        raise TypeError(f"Expect datasets.Dataset or datasets.IterableDataset type, got {type(dataset)}")
 
-    if batching is None:
-        data = dataset.data.to_batches()  # list of RecordBatch
-    else:
-        data = dataset
-    builder = read_sequence(data)
+    if isinstance(dataset, Dataset):
+        if batching is None:
+            data = dataset.data.to_batches()  # list of RecordBatch
+        else:
+            data = dataset
+        builder = read_sequence(data)
+    else:  # IterableDataset
+        def reset_fn(iterator: IterableDataset) -> IterableDataset:
+            return iter(iterator)
+        
+        builder = read_iterator(
+            iterator=iter(dataset),
+            reset_fn=reset_fn,
+            infinite=False,
+            skip_pickling_check=True
+        )
 
     # Shard.
     builder.shard(gang.rank, gang.size, allow_uneven=True)
